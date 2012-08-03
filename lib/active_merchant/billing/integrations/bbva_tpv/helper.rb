@@ -188,7 +188,7 @@ module ActiveMerchant #:nodoc:
               creds[:terminal_id].to_s +
               creds[:comercial_id].to_s +
               @fields['idtransaccion'] +
-              (@fields['importe'].gsub(/[\.,]/, '') +
+              @fields['importe'].gsub(/[\.,]/, '') +
               @fields['moneda'] +
               (@fields['localizador'] || '') +
               BbvaTpv::Helper.secret_word
