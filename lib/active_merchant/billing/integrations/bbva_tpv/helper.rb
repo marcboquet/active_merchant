@@ -15,7 +15,7 @@ module ActiveMerchant #:nodoc:
         #
         # This helper requires the credentials to be set before transactions can be peformed.
         # The credentials :transaction_id (idterminal), and
-        # :comercial_id (idcomercio) are provided in the BBVA TPV support pages. The :secret_key
+        # :commercial_id (idcomercio) are provided in the BBVA TPV support pages. The :secret_key
         # and :secret_key_data are specials that need to be generated inside the BBVA site
         # under the "Descargar Palabra Secreta" section. Basically, the secret key is a value
         # you generate and the key data is the contents of the file that BBVA return.
@@ -29,11 +29,11 @@ module ActiveMerchant #:nodoc:
         class Helper < ActiveMerchant::Billing::Integrations::Helper
           class << self
             # Credentials should be set as a hash containing the fields:
-            #  :terminal_id, :comercial_id, :secret_key, :secret_key_data
+            #  :terminal_id, :commercial_id, :secret_key, :secret_key_data
             attr_accessor :credentials
 
             def secret_word
-              xor_key = self.credentials[:secret_key] + self.credentials[:comercial_id][0,9] + '***'
+              xor_key = self.credentials[:secret_key] + self.credentials[:commercial_id][0,9] + '***'
               result = ""
               self.credentials[:secret_key_data].split(';').each_with_index do |part,i|
                 bin = xor_key[i]
@@ -121,7 +121,7 @@ module ActiveMerchant #:nodoc:
             xml.tpv do
               xml.oppago do
                 xml.idterminal creds[:terminal_id]
-                xml.idcomercio creds[:comercial_id]
+                xml.idcomercio creds[:commercial_id]
                 xml.idtransaccion @fields['idtransaccion']
                 xml.moneda @fields['moneda'] # ISO Money Code
                 xml.importe @fields['importe']
@@ -142,7 +142,7 @@ module ActiveMerchant #:nodoc:
             xml.tpv do
               xml.opconsulta do
                 xml.idterminal creds[:terminal_id]
-                xml.idcomercio creds[:comercial_id]
+                xml.idcomercio creds[:commercial_id]
                 xml.idtransaccion @fields['idtransaccion']
                 xml.moneda @fields['moneda'] # ISO Money Code
                 xml.importe @fields['importe']
@@ -186,7 +186,7 @@ module ActiveMerchant #:nodoc:
             creds = BbvaTpv::Helper.credentials
             str = 
               creds[:terminal_id].to_s +
-              creds[:comercial_id].to_s +
+              creds[:commercial_id].to_s +
               @fields['idtransaccion'] +
               @fields['importe'].gsub(/[\.,]/, '') +
               @fields['moneda'] +

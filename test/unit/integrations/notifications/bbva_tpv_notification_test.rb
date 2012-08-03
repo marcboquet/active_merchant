@@ -6,7 +6,7 @@ class BbvaTpvNotificationTest < Test::Unit::TestCase
   def setup
     BbvaTpv::Helper.credentials = {
         :terminal_id => '999999',
-        :comercial_id => 'B8291502600001',
+        :commercial_id => 'B8291502600001',
         :secret_key => 'eH2dJ9gk',
         :secret_key_data => '5D;7F;0A;27;09;0D;25;5D;04;01;0B;00;06;01;00;70;06;1C;19;19'
     }
